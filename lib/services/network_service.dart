@@ -32,7 +32,7 @@ class NetworkService {
     final token = AuthService.to.token.value;
     return {
       'Content-Type': 'application/json',
-      'Access-Token': token ?? '',
+      'Authorization': 'Bearer $token',
       'Accept': 'application/json'
     };
   }
@@ -41,7 +41,7 @@ class NetworkService {
     final token = AuthService.to.token.value;
     return {
       HttpHeaders.contentTypeHeader: Headers.formUrlEncodedContentType,
-      'Access-Token': token ?? '',
+      'Authorization': 'Bearer $token',
       'Accept': 'application/json',
     };
   }
