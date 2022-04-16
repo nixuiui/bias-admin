@@ -19,11 +19,9 @@ class HomeView extends GetView<HomeController> {
         title: Obx((() => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            NxText(
-              controller.user.value?.name ?? ''
-            ),
-            NxText.small1(
-              '(${AuthService.to.role.value})'
+            NxText.lead1(
+              '${controller.user.value?.name}',
+              color: Colors.black,
             ),
           ],
         ))),
@@ -71,12 +69,13 @@ class HomeView extends GetView<HomeController> {
               ),
             ),
             ListTile(
-              title: Text('Merchat'),
-              leading: Icon(Icons.shopping_bag),
+              title: Text('Riwayat Penarikan Saldo'),
+              leading: Icon(Icons.history),
+              onTap: () => Get.toNamed(Routes.merchatHistoryWithdraw),
             ),
             ListTile(
-              title: Text('Order'),
-              leading: Icon(Icons.shopping_bag),
+              title: Text('Penjualan'),
+              leading: Icon(Icons.sell),
               onTap: () => Get.toNamed(Routes.order),
             ),
           ],

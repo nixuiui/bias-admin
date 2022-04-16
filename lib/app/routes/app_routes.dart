@@ -12,6 +12,7 @@ abstract class Routes {
   static const merchat = '/merchant';
   static const merchatDetail = '/merchant-detail';
   static const merchatForm = '/merchant-form';
+  static const merchatHistoryWithdraw = '/merchant-history-withdraw';
   
   static const order = '/order';
 

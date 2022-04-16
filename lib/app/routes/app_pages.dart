@@ -1,5 +1,6 @@
 import 'package:bias_admin/app/modules/auth/auth_pages.dart';
 import 'package:bias_admin/app/modules/home/home_pages.dart';
+import 'package:bias_admin/app/modules/merchant/merchant_pages.dart';
 import 'package:bias_admin/app/modules/order/order_pages.dart';
 import 'package:bias_admin/app/modules/splash/splash_pages.dart';
 
@@ -15,5 +16,6 @@ class AppPages {
     ...authPages,
     ...homePages,
     ...orderPages,
+    ...merchantPages,
   ];
 }

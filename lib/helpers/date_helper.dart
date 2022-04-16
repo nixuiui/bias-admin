@@ -31,6 +31,10 @@ class DateHelper {
   String? format5({bool range = false}) {
     return formatDate(range: range, pattern: 'yyyy-MM-dd HH:mm:ss');
   }
+  
+  String? format6({bool range = false}) {
+    return formatDate(range: range, pattern: 'yyyy-MM-dd HH:mm');
+  }
 
   String? formatDate({bool range = false, String? pattern}) {
     if(range) {
