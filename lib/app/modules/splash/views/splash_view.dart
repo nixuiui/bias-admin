@@ -36,7 +36,7 @@ class SplashView extends GetView<SplashController> {
               ],
             ),
             NxText(
-              'PT. Rindang TIgasatu Pratama',
+              'Bias.id',
               color: Colors.white,
             ),
           ],
