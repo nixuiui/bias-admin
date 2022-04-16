@@ -21,6 +21,7 @@ class OrderController extends GetxController {
   var hasReachedMax = false;
   var isLoading = RxBool(false);
   final scrollController = ScrollController();
+  var searchController = TextEditingController();
 
   final dataList = Rx<List<Order>>([]);
 
@@ -71,6 +72,7 @@ class OrderController extends GetxController {
       final response = await _orderRepository.getList(
         page: page, 
         limit: limit, 
+        search: searchController.text,
       );
       if(page == 1) {
         dataList.value = response ?? [];

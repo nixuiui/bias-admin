@@ -10,7 +10,8 @@ class OrderRepository {
 
   Future<List<Order>?> getList({
     int page = 1,
-    int limit = 20
+    int limit = 20,
+    String? search
   }) async {
     try {
       var url = '/${AuthService.to.role}/order';
@@ -19,6 +20,7 @@ class OrderRepository {
         parameters: {
           'page': page,
           'limit': limit,
+          'search': search,
         }
       );
       return orderFromJson(

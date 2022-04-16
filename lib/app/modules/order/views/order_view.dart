@@ -12,95 +12,117 @@ class OrderView extends GetView<OrderController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(
-          'Order',
-        )
-      ),
-      body: RefreshIndicator(
-        onRefresh: () async => controller.onRefresh(),
-        child: Obx(() {
-          return ListView(
-            controller: controller.scrollController,
-            physics: AlwaysScrollableScrollPhysics(),
-            children: [
-              ListView.separated(
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
-                padding: EdgeInsets.zero,
-                itemCount: controller.dataList.value.length,
-                separatorBuilder: (contextn, index) => Divider(height: 0), 
-                itemBuilder: (contextn, index) => Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text(
+            'Order',
+          )
+        ),
+        body: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(8),
+              child: NxTextFieldBox(
+                backgroundColor: Colors.grey[100],
+                borderRadius: 50,
+                suffix: Icon(Icons.search),
+                textHint: 'Cari disini',
+                controller: controller.searchController,
+                onFieldSubmitted: (val) => controller.onRefresh(),
+                suffixClicked: controller.onRefresh,
+              ),
+            ),
+            Divider(),
+            Expanded(
+              child: RefreshIndicator(
+                onRefresh: () async => controller.onRefresh(),
+                child: Obx(() {
+                  return ListView(
+                    controller: controller.scrollController,
+                    physics: AlwaysScrollableScrollPhysics(),
                     children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            NxText(
-                              controller.dataList.value[index].note ?? '-',
-                              color: Colors.black,
-                              fontSize: 16,
-                              lineHeight: 1.5,
-                            ),
-                            SizedBox(height: 4),
-                            NxText(
-                              controller.dataList.value[index].transactionCode ?? '-',
-                              color: Colors.grey,
-                              fontSize: 12,
-                            ),
-                            SizedBox(height: 4),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.store, 
-                                  size: 12, 
-                                  color: Colors.grey
+                      ListView.separated(
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        padding: EdgeInsets.zero,
+                        itemCount: controller.dataList.value.length,
+                        separatorBuilder: (contextn, index) => Divider(height: 0), 
+                        itemBuilder: (contextn, index) => Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    NxText(
+                                      controller.dataList.value[index].note ?? '-',
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      lineHeight: 1.5,
+                                    ),
+                                    SizedBox(height: 4),
+                                    NxText(
+                                      controller.dataList.value[index].transactionCode ?? '-',
+                                      color: Colors.grey,
+                                      fontSize: 12,
+                                    ),
+                                    SizedBox(height: 4),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.store, 
+                                          size: 12, 
+                                          color: Colors.grey
+                                        ),
+                                        SizedBox(width: 4),
+                                        NxText.small1(
+                                          controller.dataList.value[index].merchant?.name ?? '-',
+                                          color: Colors.grey
+                                        ),
+                                        SizedBox(width: 8),
+                                        Icon(
+                                          Icons.person, 
+                                          size: 12, 
+                                          color: Colors.grey
+                                        ),
+                                        SizedBox(width: 4),
+                                        Expanded(
+                                          child: NxText.small1(
+                                            controller.dataList.value[index].user?.name ?? '-',
+                                            color: Colors.grey,
+                                            maxLines: 1,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                                SizedBox(width: 4),
-                                NxText.small1(
-                                  controller.dataList.value[index].merchant?.name ?? '-',
-                                  color: Colors.grey
-                                ),
-                                SizedBox(width: 8),
-                                Icon(
-                                  Icons.person, 
-                                  size: 12, 
-                                  color: Colors.grey
-                                ),
-                                SizedBox(width: 4),
-                                Expanded(
-                                  child: NxText.small1(
-                                    controller.dataList.value[index].user?.name ?? '-',
-                                    color: Colors.grey,
-                                    maxLines: 1,
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+                              ),
+                              NxText.lead1(
+                                rupiah(controller.dataList.value[index].totalBuy),
+                                color: Colors.green,
+                              )
+                            ],
+                          ),
+                        ), 
                       ),
-                      NxText.lead1(
-                        rupiah(controller.dataList.value[index].totalBuy),
-                        color: Colors.green,
-                      )
+                      if(controller.isLoading.value) Container(
+                        padding: EdgeInsets.all(16),
+                        child: Center(child: NxLoadingSpinner())
+                      ),
+                      SizedBox(height: 32)
                     ],
-                  ),
-                ), 
+                  );
+                }),
               ),
-              if(controller.isLoading.value) Container(
-                padding: EdgeInsets.all(16),
-                child: Center(child: NxLoadingSpinner())
-              ),
-              SizedBox(height: 32)
-            ],
-          );
-        }),
+            ),
+          ],
+        ),
       ),
     );
   }
