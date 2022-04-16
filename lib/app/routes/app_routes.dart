@@ -15,5 +15,12 @@ abstract class Routes {
   static const merchatHistoryWithdraw = '/merchant-history-withdraw';
   
   static const order = '/order';
+  
+  static const user = '/user';
+  static const userMenu = '/user-menu';
+  static const userTopupHistory = '/user-topup-history';
+  static const userUpdate = '/user-update';
+  static const userUpdateSaldo = '/user-update-saldo';
+  static const userUpdatePassword = '/user-update-password';
 
 }

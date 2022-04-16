@@ -14,7 +14,7 @@ class LoginView extends GetView<AuthController> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         body: Container(
-          padding: EdgeInsets.all(40),
+          padding: EdgeInsets.symmetric(vertical: 40, horizontal: 24),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           child: Column(

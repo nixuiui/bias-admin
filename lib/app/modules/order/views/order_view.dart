@@ -73,9 +73,12 @@ class OrderView extends GetView<OrderController> {
                                   color: Colors.grey
                                 ),
                                 SizedBox(width: 4),
-                                NxText.small1(
-                                  controller.dataList.value[index].user?.name ?? '-',
-                                  color: Colors.grey
+                                Expanded(
+                                  child: NxText.small1(
+                                    controller.dataList.value[index].user?.name ?? '-',
+                                    color: Colors.grey,
+                                    maxLines: 1,
+                                  ),
                                 ),
                               ],
                             )
