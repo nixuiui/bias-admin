@@ -41,15 +41,17 @@ class User {
         password: json["password"],
         address: json["address"],
         phoneNumber: json["phoneNumber"],
-        images: List<dynamic>.from(json["images"].map((x) => x)),
+        images: json["images"] != null 
+            ? List<dynamic>.from(json["images"].map((x) => x))
+            : [],
         sold: json["sold"],
         isDeleted: json["isDeleted"],
         balance: json["balance"],
         id: json["_id"],
         userName: json["userName"],
-        name: json["name"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        name: json["name"] ?? json["fullName"],
+        createdAt: json["createdAt"] != null ? DateTime.parse(json["createdAt"]) : null,
+        updatedAt: json["updatedAt"] != null ? DateTime.parse(json["updatedAt"]) : null,
         v: json["__v"],
         token: json["token"],
     );

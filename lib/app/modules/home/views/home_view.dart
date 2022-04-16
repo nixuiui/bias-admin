@@ -1,9 +1,10 @@
 import 'package:bias_admin/app/modules/home/controllers/home_controller.dart';
+import 'package:bias_admin/app/routes/app_pages.dart';
 import 'package:bias_admin/helpers/general.dart';
 import 'package:bias_admin/resources/colors.dart';
 import 'package:bias_admin/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 import 'package:nx_flutter_ui_starter_pack/nx_flutter_ui_starter_pack.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -76,6 +77,7 @@ class HomeView extends GetView<HomeController> {
             ListTile(
               title: Text('Order'),
               leading: Icon(Icons.shopping_bag),
+              onTap: () => Get.toNamed(Routes.order),
             ),
           ],
         ),
