@@ -6,6 +6,7 @@ class LocalStorageKeys {
   static const String username = 'username';
   static const String token = 'token';
   static const String user = 'user';
+  static const String role = 'role';
 }
 
 class LocalStorageService extends GetxService{
@@ -43,6 +44,15 @@ class LocalStorageService extends GetxService{
 
   Future setUser(User? data) async {
     box.write(LocalStorageKeys.user, data != null ? userToJson(data) : null);
+  }
+
+  Future<String?> get role async {
+    final role = box.read(LocalStorageKeys.role);
+    return role;
+  }
+
+  Future setRole(String? role) async {
+    box.write(LocalStorageKeys.role, role);
   }
 
 }

@@ -11,6 +11,7 @@ class AuthController extends GetxController {
 
   final authRepository = AuthRepository();
 
+  final role = 'admin'.obs;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   
@@ -22,6 +23,7 @@ class AuthController extends GetxController {
   AuthController() {
     debugPrint('AuthController:: AuthController()');
     emailController.text = AuthService.to.username.value ?? '';
+    role.value = AuthService.to.role.value ?? 'admin';
   }
 
   bool isValid() {
@@ -47,12 +49,14 @@ class AuthController extends GetxController {
       try {
         loading.value = true;
         final response = await authRepository.login(
+          role: role.value,
           email: emailController.text, 
           password: passwordController.text, 
         );
         AuthService.to.setUsername(emailController.text);
         AuthService.to.setToken(response?.token);
         AuthService.to.setUser(response);
+        AuthService.to.setRole(role.value);
         Get.offNamed(Routes.home);
       } catch (e) {
         loading.value = false;

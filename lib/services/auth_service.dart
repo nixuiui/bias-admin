@@ -16,9 +16,11 @@ class AuthService extends GetxService {
     final username = await localStorage.username;
     final token = await localStorage.token;
     final user = await localStorage.user;
+    final role = await localStorage.role;
     this.username = Rx<String?>(username);
     this.token = Rx<String?>(token);
     this.user = Rx<User?>(user);
+    this.role = Rx<String?>(role);
     isLoggedIn.value = token != null;
   }
 
@@ -26,6 +28,7 @@ class AuthService extends GetxService {
   late Rx<String?> username;
   late Rx<String?> token;
   late Rx<User?> user;
+  late Rx<String?> role;
 
   void setUsername(String? data) async {
     await LocalStorageService.to.setUsername(data);
@@ -40,6 +43,11 @@ class AuthService extends GetxService {
   void setUser(User? data) async {
     await LocalStorageService.to.setUser(data);
     user = Rx<User?>(data);
+  }
+  
+  void setRole(String? data) async {
+    await LocalStorageService.to.setRole(data);
+    role = Rx<String?>(data);
   }
 
   void logout() async {

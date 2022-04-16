@@ -1,4 +1,5 @@
 import 'package:bias_admin/app/modules/home/controllers/home_controller.dart';
+import 'package:bias_admin/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:nx_flutter_ui_starter_pack/nx_flutter_ui_starter_pack.dart';
@@ -28,7 +29,7 @@ class HomeView extends GetView<HomeController> {
       bottomNavigationBar: Container(
         padding: EdgeInsets.all(12),
         child: NxButton.primary(
-          onPressed: () {},
+          onPressed: () => AuthService.to.logout(),
           child: NxText(
             'Logout', 
             color: Colors.white,

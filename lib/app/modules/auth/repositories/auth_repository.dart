@@ -6,14 +6,16 @@ class AuthRepository {
   var network = NetworkService.to;
 
   Future<User?> login({
+    required String role,
     required String email,
     required String password,
   }) async {
     try {
-      var url = '/admin/login';
+      var url = '/$role/login';
       final response = await network.post(
         url: url, 
         data: {
+          "emailOrUsername": email,
           "email": email,
           "password": password,
         }

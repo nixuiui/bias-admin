@@ -3,21 +3,16 @@ import 'package:bias_admin/resources/colors.dart';
 import 'package:bias_admin/services/config_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nx_flutter_ui_starter_pack/nx_checkbox.dart';
 import 'package:nx_flutter_ui_starter_pack/nx_flutter_ui_starter_pack.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends GetView<AuthController> {
   const LoginView({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
-    final controller = Get.put(AuthController());
-
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        backgroundColor: AppColors.primary,
         body: Container(
           padding: EdgeInsets.all(40),
           width: MediaQuery.of(context).size.width,
@@ -35,8 +30,7 @@ class LoginView extends StatelessWidget {
                     NxText(
                       'Login',
                       fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
                       lineHeight: 1.5,
                     ),
                     SizedBox(height: 8),
@@ -44,73 +38,12 @@ class LoginView extends StatelessWidget {
                       'Silahkan Masuk',
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
-                      color: Colors.white,
                       lineHeight: 1.5,
                     ),
                     SizedBox(height: 40),
-                    NxText.lead1(
-                      'Username',
-                      color: Colors.white,
-                    ),
-                    SizedBox(height: 12),
-                    Obx(() => NxTextFieldBox(
-                      textHint: 'Masukan Username',
-                      backgroundColor: AppColors.bgInputBlack,
-                      borderColor: AppColors.bgInputBlack,
-                      textColor: Colors.white,
-                      borderRadius: 12,
-                      padding: 14,
-                      prefix: Icon(Icons.email, color: Colors.white),
-                      controller: controller.emailController,
-                      textError: controller.emailError.value,
-                    )),
+                    _buildRoleOptions(),
                     SizedBox(height: 20),
-                    NxText.lead1(
-                      'Password',
-                      color: Colors.white,
-                    ),
-                    SizedBox(height: 12),
-                    Obx(() => NxTextFieldBox(
-                      textHint: 'Masukan Password',
-                      backgroundColor: AppColors.bgInputBlack,
-                      borderColor: AppColors.bgInputBlack,
-                      textColor: Colors.white,
-                      borderRadius: 12,
-                      padding: 14,
-                      prefix: Icon(Icons.lock, color: Colors.white),
-                      controller: controller.passwordController,
-                      textError: controller.passwordError.value,
-                      isObsecure: true,
-                    )),
-                    SizedBox(height: 28),
-                    Obx(() => NxButton(
-                      color: Colors.white,
-                      borderColor: Colors.white,
-                      child: NxText(
-                        'Login',
-                        color: AppColors.primary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      padding: 14,
-                      fontSize: 16,
-                      textColor: AppColors.primary,
-                      onPressed: controller.loading.value ? null : () => controller.login(),
-                      isLoading: controller.loading.value,
-                    )),
-                    SizedBox(height: 24),
-                    NxCheckbox(
-                      child: NxText(
-                        'Mode Trial', 
-                        color: Colors.white,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      checked: false,
-                      size: 12,
-                      borderRadius: 2,
-                      color: Colors.white,
-                    )
+                    _buildLoginForm(),
                   ],
                 ),
               ),
@@ -122,6 +55,80 @@ class LoginView extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildRoleOptions() {
+    return Row(
+      children: [
+        Expanded(
+          child: Obx(() => NxBox(
+            borderRadius: 8,
+            borderColor: controller.role.value == 'admin' ? AppColors.primary : Colors.black26,
+            padding: EdgeInsets.all(16),
+            onPressed: () => controller.role.value = 'admin',
+            child: NxText(
+              'ADMIN',
+              textAlign: TextAlign.center,
+              fontWeight: FontWeight.w700,
+              color: controller.role.value == 'admin' ? AppColors.primary : Colors.black26,
+            ),
+          )),
+        ),
+        SizedBox(width: 16),
+        Expanded(
+          child: Obx(() => NxBox(
+            borderRadius: 8,
+            borderColor: controller.role.value == 'merchant' ? AppColors.primary : Colors.black26,
+            padding: EdgeInsets.all(16),
+            onPressed: () => controller.role.value = 'merchant',
+            child: NxText(
+              'MERCHANT',
+              textAlign: TextAlign.center,
+              fontWeight: FontWeight.w700,
+              color: controller.role.value == 'merchant' ? AppColors.primary : Colors.black26,
+            ),
+          )),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildLoginForm() {
+    return Column(
+      children: [
+        Obx(() => NxTextFieldBox(
+          textHint: 'Masukan Username',
+          borderRadius: 12,
+          padding: 14,
+          prefix: Icon(Icons.email, color: Colors.grey),
+          controller: controller.emailController,
+          textError: controller.emailError.value,
+        )),
+        SizedBox(height: 20),
+        Obx(() => NxTextFieldBox(
+          textHint: 'Masukan Password',
+          borderRadius: 12,
+          padding: 14,
+          prefix: Icon(Icons.lock, color: Colors.grey),
+          controller: controller.passwordController,
+          textError: controller.passwordError.value,
+          isObsecure: true,
+        )),
+        SizedBox(height: 28),
+        Obx(() => NxButton.primary(
+          child: NxText(
+            'Login',
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+          padding: 14,
+          fontSize: 16,
+          onPressed: controller.loading.value ? null : () => controller.login(),
+          isLoading: controller.loading.value,
+        )),
+      ],
     );
   }
 }
