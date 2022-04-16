@@ -22,6 +22,7 @@ class UserMenuView extends StatelessWidget {
         children: [
           ListTile(
             title: NxText('Riwayat Top Up'),
+            onTap: () => Get.toNamed(Routes.userTopupHistory),
             trailing: Icon(Icons.chevron_right),
           ),
           Divider(),
