@@ -1,4 +1,5 @@
 import 'package:bias_admin/app/modules/user/controllers/user_controller.dart';
+import 'package:bias_admin/helpers/general.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:nx_flutter_ui_starter_pack/nx_flutter_ui_starter_pack.dart';
@@ -53,21 +54,30 @@ class UserView extends GetView<UserController> {
                           contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                           minVerticalPadding: 0,
                           dense: true,
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          title: Row(
                             children: [
-                              NxText(
-                                controller.dataList.value[index].name ?? '-',
-                                color: Colors.black,
-                                fontSize: 16,
-                                lineHeight: 1.5,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    NxText(
+                                      controller.dataList.value[index].name ?? '-',
+                                      color: Colors.black,
+                                      lineHeight: 1.5,
+                                    ),
+                                    SizedBox(height: 4),
+                                    NxText(
+                                      '+${controller.dataList.value[index].phoneNumber}',
+                                      color: Colors.grey,
+                                      fontSize: 12,
+                                    ),
+                                  ],
+                                ),
                               ),
-                              SizedBox(height: 4),
-                              NxText(
-                                '+${controller.dataList.value[index].phoneNumber}',
-                                color: Colors.grey,
-                                fontSize: 12,
-                              ),
+                              NxText.lead2(
+                                rupiah(controller.dataList.value[index].balance),
+                                color: Colors.green,
+                              )
                             ],
                           ),
                           trailing: Icon(Icons.chevron_right),
