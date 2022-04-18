@@ -1,5 +1,8 @@
 import 'package:bias_admin/app/models/user.dart';
 import 'package:bias_admin/app/modules/user/repositories/user_repository.dart';
+import 'package:bias_admin/app/routes/app_pages.dart';
+import 'package:bias_admin/helpers/dialog_helper.dart';
+import 'package:bias_admin/helpers/network/network_exceptions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -93,6 +96,55 @@ class UserController extends GetxController {
       hasReachedMax = true;
     } else {
       page = (length/limit).ceil() + 1;
+    }
+  }
+
+  var user = Rx<User?>(null);
+
+  void openDetail(User user) {
+    this.user.value = user;
+    Get.toNamed(Routes.userDetail);
+  }
+
+  var balanceController = TextEditingController();
+  var balance = Rx<int?>(null);
+  var balanceNoteController = TextEditingController();
+  var balanceNote = Rx<String?>(null);
+  var updatingBalance = false.obs;
+
+  bool get isUpdateBalanceValid {
+    var valid = true;
+
+    if((balance.value ?? 0) <= 0) valid = false;
+
+    return valid;
+  }
+
+  void updateBalanace() async {
+    try {
+      updatingBalance.value = true;
+      final response = await _userRepository.updateBalance(
+        balance: balance.value!, 
+        note: balanceNote.value, 
+        userId: user.value!.id!
+      );
+      updatingBalance.value = false;
+      user.value = response;
+      var userIndex = dataList.value.indexWhere((e) => e.id == user.value?.id);
+      if(userIndex > -1) {
+        dataList.value[userIndex] = user.value!;
+      }
+      await DialogHelper.showDialogSuccess(
+        title: 'Berhasil',
+        description: 'Saldo berhasil ditambah ke ${user.value?.name}'
+      );
+      Get.back();
+    } catch (e) {
+      updatingBalance.value = false;
+      DialogHelper.showDialogError(
+        title: 'Terjadi Kesalahan',
+        description: NetworkException.getErrorException(e).prefix
+      );
     }
   }
 

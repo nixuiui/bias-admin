@@ -20,6 +20,7 @@ class User {
         this.id,
         this.userName,
         this.name,
+        this.division,
         this.createdAt,
         this.updatedAt,
         this.v,
@@ -36,6 +37,7 @@ class User {
     String? id;
     String? userName;
     String? name;
+    String? division;
     DateTime? createdAt;
     DateTime? updatedAt;
     int? v;
@@ -54,6 +56,7 @@ class User {
         id: json["_id"],
         userName: json["userName"],
         name: json["name"] ?? json["fullName"],
+        division: json["division"],
         createdAt: json["createdAt"] != null ? DateTime.parse(json["createdAt"]) : null,
         updatedAt: json["updatedAt"] != null ? DateTime.parse(json["updatedAt"]) : null,
         v: json["__v"],
@@ -70,6 +73,7 @@ class User {
         "balance": balance,
         "_id": id,
         "userName": userName,
+        "division": division,
         "name": name,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),

@@ -5,10 +5,23 @@ import 'package:get/get.dart';
 class DialogHelper {
 
   static showDialogError({
-    String? title, String? description
-  }) {
-    Get.dialog(
+    String? title, 
+    String? description
+  }) async {
+    await Get.dialog(
       DialogAlert.error(
+        title: title,
+        description: description,
+      ),
+    );
+  }
+  
+  static showDialogSuccess({
+    String? title, 
+    String? description
+  }) async {
+    await Get.dialog(
+      DialogAlert.success(
         title: title,
         description: description,
       ),

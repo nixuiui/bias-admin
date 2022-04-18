@@ -6,25 +6,30 @@ class DialogAlert extends StatelessWidget {
   
   final String? title;
   final String? description;
+  final String? buttonTitle;
   final Widget? image;
 
   factory DialogAlert.success({
     String? title,
     String? description,
+    String? buttonTitle = 'OK',
     Widget? image,
   }) => DialogAlert(
     title: title,
     description: description,
+    buttonTitle: buttonTitle,
     image: Image.asset('assets/pngs/success.png'),
   );
 
   factory DialogAlert.error({
     String? title,
     String? description,
+    String? buttonTitle = 'Coba Lagi',
     Widget? image,
   }) => DialogAlert(
     title: title,
     description: description,
+    buttonTitle: buttonTitle,
     image: Image.asset('assets/pngs/error.png'),
   );
 
@@ -32,6 +37,7 @@ class DialogAlert extends StatelessWidget {
     Key? key,
     this.title,
     this.description,
+    this.buttonTitle,
     this.image,
   }) : super(key: key);
 
@@ -82,7 +88,7 @@ class DialogAlert extends StatelessWidget {
                 onPressed: () => Get.back(),
                 radius: 10,
                 child: Text(
-                  'Coba Lagi',
+                  buttonTitle ?? 'OK',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w600,

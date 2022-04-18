@@ -54,31 +54,35 @@ class UserView extends GetView<UserController> {
                           contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                           minVerticalPadding: 0,
                           dense: true,
-                          title: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    NxText(
-                                      controller.dataList.value[index].name ?? '-',
-                                      color: Colors.black,
-                                      lineHeight: 1.5,
-                                    ),
-                                    SizedBox(height: 4),
-                                    NxText(
-                                      '+${controller.dataList.value[index].phoneNumber}',
-                                      color: Colors.grey,
-                                      fontSize: 12,
-                                    ),
-                                  ],
+                          title: GestureDetector(
+                            onTap: () => controller.openDetail(controller.dataList.value[index]),
+                            behavior: HitTestBehavior.translucent,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      NxText(
+                                        controller.dataList.value[index].name ?? '-',
+                                        color: Colors.black,
+                                        lineHeight: 1.5,
+                                      ),
+                                      SizedBox(height: 4),
+                                      NxText(
+                                        '+${controller.dataList.value[index].phoneNumber}',
+                                        color: Colors.grey,
+                                        fontSize: 12,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              NxText.lead2(
-                                rupiah(controller.dataList.value[index].balance),
-                                color: Colors.green,
-                              )
-                            ],
+                                NxText.lead2(
+                                  rupiah(controller.dataList.value[index].balance),
+                                  color: Colors.green,
+                                )
+                              ],
+                            ),
                           ),
                           trailing: Icon(Icons.chevron_right),
                         ), 
