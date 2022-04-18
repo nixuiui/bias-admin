@@ -106,6 +106,10 @@ class UserController extends GetxController {
     Get.toNamed(Routes.userDetail);
   }
 
+  // ----------------------------------------------------
+  // UPDATE SALDO USER
+  // ----------------------------------------------------
+
   var balanceController = TextEditingController();
   var balance = Rx<int?>(null);
   var balanceNoteController = TextEditingController();
@@ -141,6 +145,45 @@ class UserController extends GetxController {
       Get.back();
     } catch (e) {
       updatingBalance.value = false;
+      DialogHelper.showDialogError(
+        title: 'Terjadi Kesalahan',
+        description: NetworkException.getErrorException(e).prefix
+      );
+    }
+  }
+
+
+  // ----------------------------------------------------
+  // UPDATE PASSWORD USER
+  // ----------------------------------------------------
+
+  var passwordController = TextEditingController();
+  var password = Rx<String?>(null);
+  var updatingPassword = false.obs;
+
+  bool get isUpdatePasswordValid {
+    var valid = true;
+
+    if((password.value ?? '') == '') valid = false;
+
+    return valid;
+  }
+
+  void updatePassword() async {
+    try {
+      updatingPassword.value = true;
+      await _userRepository.updatePassword(
+        password: password.value!,
+        userId: user.value!.id!
+      );
+      updatingPassword.value = false;
+      await DialogHelper.showDialogSuccess(
+        title: 'Berhasil',
+        description: 'Password berhasil diubah'
+      );
+      Get.back();
+    } catch (e) {
+      updatingPassword.value = false;
       DialogHelper.showDialogError(
         title: 'Terjadi Kesalahan',
         description: NetworkException.getErrorException(e).prefix

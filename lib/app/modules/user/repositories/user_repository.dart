@@ -55,7 +55,6 @@ class UserRepository {
     }
   }
   
-  // TODO: bug when input balance, still user prev state
   Future<User?> updateBalance({
     required String userId,
     required int balance,
@@ -68,6 +67,26 @@ class UserRepository {
         data: {
           "balance" : balance,
           "note" : note
+        }
+      );
+      return userFromJson(
+        json.encode(response.data['data'])
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+  
+  Future<User?> updatePassword({
+    required String userId,
+    required String password,
+  }) async {
+    try {
+      var url = '/${AuthService.to.role}/user-password/$userId';
+      final response = await network.patch(
+        url: url,
+        data: {
+          "password" : password
         }
       );
       return userFromJson(

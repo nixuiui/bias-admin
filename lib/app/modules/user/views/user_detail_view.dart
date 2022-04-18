@@ -41,6 +41,7 @@ class _UserDetailViewState extends State<UserDetailView> {
           _buildButtonAction(
             icon: Icon(Icons.lock, color: Colors.grey[700]),
             title: 'Ubah Password',
+            onTap: () => Get.toNamed(Routes.userUpdatePassword)
           ),
           SizedBox(height: 24),
           _buildButtonAction(
