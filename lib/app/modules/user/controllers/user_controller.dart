@@ -190,5 +190,87 @@ class UserController extends GetxController {
       );
     }
   }
+  
+  // ----------------------------------------------------
+  // UPDATE USER
+  // ----------------------------------------------------
+
+  var fullNameController = TextEditingController();
+  var fullName = Rx<String>('');
+  var fullNameError = Rx<String>('');
+  var divisionController = TextEditingController();
+  var division = Rx<String>('');
+  var divisionError = Rx<String>('');
+  var phoneNumberController = TextEditingController();
+  var phoneNumber = Rx<String>('');
+  var phoneNumberError = Rx<String>('');
+  var usernameController = TextEditingController();
+  var username = Rx<String>('');
+  var usernameError = Rx<String>('');
+  var updatingUser = false.obs;
+
+  void initUpdateUserForm() {
+    fullNameController.text = user.value?.name ?? '';
+    fullName.value = user.value?.name ?? '';
+    divisionController.text = user.value?.division ?? '';
+    division.value = user.value?.division ?? '';
+    phoneNumberController.text = user.value?.phoneNumber ?? '';
+    phoneNumber.value = user.value?.phoneNumber ?? '';
+    usernameController.text = user.value?.userName?? '';
+    username.value = user.value?.userName?? '';
+  }
+
+  bool get isUpdateUserValid {
+    var valid = true;
+
+    if(fullName.value == '') {
+      fullNameError.value = 'Nama lengkap harus diisi';
+      valid = false;
+    }
+    if(division.value == '') {
+      divisionError.value = 'Divisi harus diisi';
+      valid = false;
+    }
+    if(phoneNumber.value == '') {
+      phoneNumberError.value = 'No hp harus diisi';
+      valid = false;
+    }
+    if(username.value == '') {
+      usernameError.value = 'Username harus diisi';
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  void updateUser() async {
+    try {
+      updatingUser.value = true;
+      final response = await _userRepository.updateUser(
+        userId: user.value!.id!,
+        fullName: fullName.value,
+        division: division.value,
+        phoneNumber: phoneNumber.value,
+        username: username.value,
+      );
+      updatingUser.value = false;
+      user.value = response;
+      var userIndex = dataList.value.indexWhere((e) => e.id == user.value?.id);
+      if(userIndex > -1) {
+        dataList.value[userIndex] = user.value!;
+      }
+      await DialogHelper.showDialogSuccess(
+        title: 'Berhasil',
+        description: 'Data user berhasil diubah'
+      );
+      Get.back();
+    } catch (e) {
+      updatingUser.value = false;
+      DialogHelper.showDialogError(
+        title: 'Terjadi Kesalahan',
+        description: NetworkException.getErrorException(e).prefix
+      );
+    }
+  }
 
 }

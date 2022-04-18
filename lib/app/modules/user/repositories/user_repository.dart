@@ -96,5 +96,31 @@ class UserRepository {
       rethrow;
     }
   }
+  
+  Future<User?> updateUser({
+    required String userId,
+    required String fullName,
+    required String division,
+    required String phoneNumber,
+    required String username,
+  }) async {
+    try {
+      var url = '/${AuthService.to.role}/user/$userId';
+      final response = await network.patch(
+        url: url,
+        data:  {
+          "fullName": fullName,
+          "division": division,
+          "phoneNumber": phoneNumber,
+          "userName": username
+        }
+      );
+      return userFromJson(
+        json.encode(response.data['data'])
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
 
 }
