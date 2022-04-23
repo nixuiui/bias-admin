@@ -36,7 +36,7 @@ class _MerchantDetailViewState extends State<MerchantDetailView> {
           _buildButtonAction(
             icon: Icon(Icons.edit, color: Colors.grey[700]),
             title: 'Ubah User',
-            onTap: () => Get.toNamed(Routes.userUpdate)
+            onTap: () => Get.toNamed(Routes.merchantUpdate)
           ),
           SizedBox(height: 24),
           _buildButtonAction(

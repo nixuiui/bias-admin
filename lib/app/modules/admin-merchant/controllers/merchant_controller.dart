@@ -196,12 +196,12 @@ class MerchantController extends GetxController {
   // UPDATE USER
   // ----------------------------------------------------
 
-  var fullNameController = TextEditingController();
-  var fullName = Rx<String>('');
-  var fullNameError = Rx<String>('');
-  var divisionController = TextEditingController();
-  var division = Rx<String>('');
-  var divisionError = Rx<String>('');
+  var nameController = TextEditingController();
+  var name = Rx<String>('');
+  var nameError = Rx<String>('');
+  var addressController = TextEditingController();
+  var address = Rx<String>('');
+  var addressError = Rx<String>('');
   var phoneNumberController = TextEditingController();
   var phoneNumber = Rx<String>('');
   var phoneNumberError = Rx<String>('');
@@ -211,10 +211,10 @@ class MerchantController extends GetxController {
   var updatingUser = false.obs;
 
   void initUpdateUserForm() {
-    fullNameController.text = merchant.value?.name ?? '';
-    fullName.value = merchant.value?.name ?? '';
-    divisionController.text = merchant.value?.division ?? '';
-    division.value = merchant.value?.division ?? '';
+    nameController.text = merchant.value?.name ?? '';
+    name.value = merchant.value?.name ?? '';
+    addressController.text = merchant.value?.address ?? '';
+    address.value = merchant.value?.address ?? '';
     phoneNumberController.text = merchant.value?.phoneNumber ?? '';
     phoneNumber.value = merchant.value?.phoneNumber ?? '';
     usernameController.text = merchant.value?.userName?? '';
@@ -224,12 +224,12 @@ class MerchantController extends GetxController {
   bool get isUpdateUserValid {
     var valid = true;
 
-    if(fullName.value == '') {
-      fullNameError.value = 'Nama lengkap harus diisi';
+    if(name.value == '') {
+      nameError.value = 'Nama lengkap harus diisi';
       valid = false;
     }
-    if(division.value == '') {
-      divisionError.value = 'Divisi harus diisi';
+    if(address.value == '') {
+      addressError.value = 'Divisi harus diisi';
       valid = false;
     }
     if(phoneNumber.value == '') {
@@ -247,10 +247,10 @@ class MerchantController extends GetxController {
   void updateUser() async {
     try {
       updatingUser.value = true;
-      final response = await _merchantRepository.updateUser(
+      final response = await _merchantRepository.updateMerchant(
         userId: merchant.value!.id!,
-        fullName: fullName.value,
-        division: division.value,
+        name: name.value,
+        address: address.value,
         phoneNumber: phoneNumber.value,
         username: username.value,
       );

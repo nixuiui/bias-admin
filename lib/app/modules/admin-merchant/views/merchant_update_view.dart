@@ -1,21 +1,21 @@
-import 'package:bias_admin/app/modules/user/controllers/user_controller.dart';
+import 'package:bias_admin/app/modules/admin-merchant/controllers/merchant_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nx_flutter_ui_starter_pack/nx_flutter_ui_starter_pack.dart';
 
-class UserUpdateView extends StatefulWidget {
+class MerchantUpdateView extends StatefulWidget {
   
-  const UserUpdateView({ 
+  const MerchantUpdateView({ 
     Key? key,
   }) : super(key: key);
 
   @override
-  State<UserUpdateView> createState() => _UserUpdateViewState();
+  State<MerchantUpdateView> createState() => _MerchantUpdateViewState();
 }
 
-class _UserUpdateViewState extends State<UserUpdateView> {
+class _MerchantUpdateViewState extends State<MerchantUpdateView> {
 
-  final controller = UserController.to;
+  final controller = MerchantController.to;
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _UserUpdateViewState extends State<UserUpdateView> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
-            'Ubah Profile User',
+            'Ubah Merchant',
           )
         ),
         body: Column(
@@ -47,20 +47,20 @@ class _UserUpdateViewState extends State<UserUpdateView> {
                       SizedBox(height: 8),
                       NxTextFieldBox(
                         textHint: 'Masukkan nama lengkap',
-                        controller: controller.fullNameController,
+                        controller: controller.nameController,
                         padding: 12,
-                        onChanged: (val) => controller.fullName.value = val,
-                        textError: controller.fullNameError.value,
+                        onChanged: (val) => controller.name.value = val,
+                        textError: controller.nameError.value,
                       ),
                       SizedBox(height: 16),
                       NxText.body2('Divisi'),
                       SizedBox(height: 8),
                       NxTextFieldBox(
                         textHint: 'Masukkan nama divisi',
-                        controller: controller.divisionController,
+                        controller: controller.addressController,
                         padding: 12,
-                        onChanged: (val) => controller.division.value = val,
-                        textError: controller.divisionError.value,
+                        onChanged: (val) => controller.address.value = val,
+                        textError: controller.addressError.value,
                       ),
                       SizedBox(height: 16),
                       NxText.body2('No HP'),

@@ -93,20 +93,20 @@ class MerchantRepository {
     }
   }
   
-  Future<User?> updateUser({
+  Future<User?> updateMerchant({
     required String userId,
-    required String fullName,
-    required String division,
+    required String name,
+    required String address,
     required String phoneNumber,
     required String username,
   }) async {
     try {
-      var url = '/${AuthService.to.role}/user/$userId';
+      var url = '/${AuthService.to.role}/merchant/$userId';
       final response = await network.patch(
         url: url,
         data:  {
-          "fullName": fullName,
-          "division": division,
+          "name": name,
+          "address": address,
           "phoneNumber": phoneNumber,
           "userName": username
         }
