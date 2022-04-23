@@ -54,7 +54,7 @@ class HomeView extends GetView<HomeController> {
         ListTile(
           title: Text('Merchant'),
           leading: Icon(Icons.store),
-          onTap: () => Get.toNamed(Routes.merchatHistoryWithdraw),
+          onTap: () => Get.toNamed(Routes.merchantMenu),
           trailing: Icon(Icons.chevron_right),
         ),
         Divider(),

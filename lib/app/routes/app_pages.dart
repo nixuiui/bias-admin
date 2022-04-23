@@ -1,3 +1,4 @@
+import 'package:bias_admin/app/modules/admin-merchant/admin_merchant_pages.dart';
 import 'package:bias_admin/app/modules/auth/auth_pages.dart';
 import 'package:bias_admin/app/modules/division/division_pages.dart';
 import 'package:bias_admin/app/modules/home/home_pages.dart';
@@ -21,5 +22,6 @@ class AppPages {
     ...merchantPages,
     ...userPages,
     ...divisionPages,
+    ...adminMerchantPages,
   ];
 }
