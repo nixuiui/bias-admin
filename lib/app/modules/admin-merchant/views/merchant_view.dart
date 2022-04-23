@@ -97,6 +97,17 @@ class MerchantView extends GetView<MerchantController> {
                 }),
               ),
             ),
+            Container(
+              color: Colors.white,
+              padding: EdgeInsets.all(16),
+              child: NxButton.primary(
+                child: NxText(
+                  'Tambah Divisi',
+                  color: Colors.white,
+                ),
+                onPressed: () => controller.openFormMerchant(),
+              ),
+            ),
           ],
         ),
       ),

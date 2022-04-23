@@ -159,13 +159,14 @@ class MerchantController extends GetxController {
   // ----------------------------------------------------
 
   var passwordController = TextEditingController();
-  var password = Rx<String?>(null);
+  var password = Rx<String>('');
+  var passwordError = Rx<String>('');
   var updatingPassword = false.obs;
 
   bool get isUpdatePasswordValid {
     var valid = true;
 
-    if((password.value ?? '') == '') valid = false;
+    if(password.value == '') valid = false;
 
     return valid;
   }
@@ -174,7 +175,7 @@ class MerchantController extends GetxController {
     try {
       updatingPassword.value = true;
       await _merchantRepository.updatePassword(
-        password: password.value!,
+        password: password.value,
         userId: merchant.value!.id!
       );
       updatingPassword.value = false;
@@ -210,6 +211,11 @@ class MerchantController extends GetxController {
   var usernameError = Rx<String>('');
   var updatingUser = false.obs;
 
+  void openFormMerchant() {
+    merchant.value = null;
+    Get.toNamed(Routes.merchantUpdate);
+  }
+
   void initUpdateUserForm() {
     nameController.text = merchant.value?.name ?? '';
     name.value = merchant.value?.name ?? '';
@@ -219,11 +225,13 @@ class MerchantController extends GetxController {
     phoneNumber.value = merchant.value?.phoneNumber ?? '';
     usernameController.text = merchant.value?.userName?? '';
     username.value = merchant.value?.userName?? '';
+    passwordController.text = '';
+    password.value = '';
   }
 
   bool get isUpdateUserValid {
     var valid = true;
-
+    
     if(name.value == '') {
       nameError.value = 'Nama lengkap harus diisi';
       valid = false;
@@ -240,11 +248,49 @@ class MerchantController extends GetxController {
       usernameError.value = 'Username harus diisi';
       valid = false;
     }
+    if(password.value == '') {
+      passwordError.value = 'Password harus diisi';
+      valid = false;
+    }
 
     return valid;
   }
 
-  void updateUser() async {
+  void saveMerchant() {
+    if(merchant.value == null) {
+      postMerchant();
+    } else {
+      updateMerchant();
+    }
+  }
+
+  void postMerchant() async {
+    try {
+      updatingUser.value = true;
+      await _merchantRepository.postMerchant(
+        name: name.value,
+        address: address.value,
+        phoneNumber: phoneNumber.value,
+        username: username.value,
+        password: password.value,
+      );
+      updatingUser.value = false;
+      onRefresh();
+      await DialogHelper.showDialogSuccess(
+        title: 'Berhasil',
+        description: 'Data merchant berhasil diubah'
+      );
+      Get.back();
+    } catch (e) {
+      updatingUser.value = false;
+      DialogHelper.showDialogError(
+        title: 'Terjadi Kesalahan',
+        description: NetworkException.getErrorException(e).prefix
+      );
+    }
+  }
+  
+  void updateMerchant() async {
     try {
       updatingUser.value = true;
       final response = await _merchantRepository.updateMerchant(

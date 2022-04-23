@@ -49,17 +49,23 @@ class _MerchantUpdateViewState extends State<MerchantUpdateView> {
                         textHint: 'Masukkan nama lengkap',
                         controller: controller.nameController,
                         padding: 12,
-                        onChanged: (val) => controller.name.value = val,
+                        onChanged: (val) {
+                          controller.name.value = val;
+                          controller.nameError.value = '';
+                        },
                         textError: controller.nameError.value,
                       ),
                       SizedBox(height: 16),
-                      NxText.body2('Divisi'),
+                      NxText.body2('Alamat'),
                       SizedBox(height: 8),
                       NxTextFieldBox(
-                        textHint: 'Masukkan nama divisi',
+                        textHint: 'Masukkan nama alamat',
                         controller: controller.addressController,
                         padding: 12,
-                        onChanged: (val) => controller.address.value = val,
+                        onChanged: (val) {
+                          controller.address.value = val;
+                          controller.addressError.value = '';
+                        },
                         textError: controller.addressError.value,
                       ),
                       SizedBox(height: 16),
@@ -70,7 +76,10 @@ class _MerchantUpdateViewState extends State<MerchantUpdateView> {
                         controller: controller.phoneNumberController,
                         inputType: TextInputType.phone,
                         padding: 12,
-                        onChanged: (val) => controller.phoneNumber.value = val,
+                        onChanged: (val) {
+                          controller.phoneNumber.value = val;
+                          controller.phoneNumberError.value = '';
+                        },
                         textError: controller.phoneNumberError.value,
                       ),
                       SizedBox(height: 16),
@@ -80,8 +89,25 @@ class _MerchantUpdateViewState extends State<MerchantUpdateView> {
                         textHint: 'Masukkan username',
                         controller: controller.usernameController,
                         padding: 12,
-                        onChanged: (val) => controller.username.value = val,
+                        onChanged: (val) {
+                          controller.username.value = val;
+                          controller.usernameError.value = '';
+                        },
                         textError: controller.usernameError.value,
+                      ),
+                      SizedBox(height: 16),
+                      if(controller.merchant.value == null) NxText.body2('Password'),
+                      if(controller.merchant.value == null) SizedBox(height: 8),
+                      if(controller.merchant.value == null) NxTextFieldBox(
+                        textHint: 'Masukkan password',
+                        controller: controller.passwordController,
+                        padding: 12,
+                        isObsecure: true,
+                        onChanged: (val) {
+                          controller.password.value = val;
+                          controller.passwordError.value = '';
+                        },
+                        textError: controller.passwordError.value,
                       ),
                     ],
                   ),
@@ -93,7 +119,7 @@ class _MerchantUpdateViewState extends State<MerchantUpdateView> {
               child: Obx(() => NxButton.primary(
                 onPressed: controller.isUpdateUserValid ? () {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  controller.updateUser();
+                  controller.saveMerchant();
                 } : null,
                 isLoading: controller.updatingUser.value,
                 child: NxText(

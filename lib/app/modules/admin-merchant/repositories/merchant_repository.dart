@@ -93,6 +93,33 @@ class MerchantRepository {
     }
   }
   
+  Future<User?> postMerchant({
+    required String name,
+    required String address,
+    required String phoneNumber,
+    required String username,
+    required String password,
+  }) async {
+    try {
+      var url = '/${AuthService.to.role}/merchant';
+      final response = await network.post(
+        url: url,
+        data:  {
+          "name": name,
+          "address": address,
+          "phoneNumber": phoneNumber,
+          "userName": username,
+          "password": password
+        }
+      );
+      return userFromJson(
+        json.encode(response.data['data'])
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<User?> updateMerchant({
     required String userId,
     required String name,
