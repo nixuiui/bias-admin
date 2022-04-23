@@ -16,6 +16,9 @@ abstract class Routes {
   
   static const order = '/order';
   
+  static const division = '/division';
+  static const divisionForm = '/division-form';
+
   static const userMenu = '/user-menu';
   static const user = '/user';
   static const userDetail = '/user-detail';

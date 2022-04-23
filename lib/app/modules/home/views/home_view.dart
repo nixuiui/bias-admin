@@ -68,7 +68,7 @@ class HomeView extends GetView<HomeController> {
         ListTile(
           title: Text('Divisi'),
           leading: Icon(Icons.groups),
-          onTap: () => Get.toNamed(Routes.order),
+          onTap: () => Get.toNamed(Routes.division),
           trailing: Icon(Icons.chevron_right),
         ),
         Divider(),
