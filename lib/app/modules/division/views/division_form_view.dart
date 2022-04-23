@@ -43,10 +43,10 @@ class _DivisionFormViewState extends State<DivisionFormView> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      NxText.body2('Nama Lengkap'),
+                      NxText.body2('Nama Divisi'),
                       SizedBox(height: 8),
                       NxTextFieldBox(
-                        textHint: 'Masukkan nama lengkap',
+                        textHint: 'Masukkan nama divisi',
                         controller: controller.nameController,
                         padding: 12,
                         onChanged: (val) => controller.name.value = val,
