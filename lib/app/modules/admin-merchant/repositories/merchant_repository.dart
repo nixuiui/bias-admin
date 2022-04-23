@@ -75,21 +75,19 @@ class MerchantRepository {
     }
   }
   
-  Future<User?> updatePassword({
+  Future<bool?> updatePassword({
     required String userId,
     required String password,
   }) async {
     try {
-      var url = '/${AuthService.to.role}/user-password/$userId';
-      final response = await network.patch(
+      var url = '/${AuthService.to.role}/merchant-password/$userId';
+      await network.patch(
         url: url,
         data: {
           "password" : password
         }
       );
-      return userFromJson(
-        json.encode(response.data['data'])
-      );
+      return true;
     } catch (e) {
       rethrow;
     }

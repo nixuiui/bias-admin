@@ -42,7 +42,7 @@ class _MerchantDetailViewState extends State<MerchantDetailView> {
           _buildButtonAction(
             icon: Icon(Icons.lock, color: Colors.grey[700]),
             title: 'Ubah Password',
-            onTap: () => Get.toNamed(Routes.userUpdatePassword)
+            onTap: () => Get.toNamed(Routes.merchantUpdatePassword)
           ),
           SizedBox(height: 24),
           _buildButtonAction(

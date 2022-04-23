@@ -2,8 +2,8 @@ import 'package:bias_admin/app/modules/admin-merchant/bindings/merchant_history_
 import 'package:bias_admin/app/modules/admin-merchant/views/merchant_detail_view.dart';
 import 'package:bias_admin/app/modules/admin-merchant/views/merchant_history_withdraw_view.dart';
 import 'package:bias_admin/app/modules/admin-merchant/views/merchant_menu_view.dart';
+import 'package:bias_admin/app/modules/admin-merchant/views/merchant_update_password_view.dart';
 import 'package:bias_admin/app/modules/user/views/user_topup_balance_view.dart';
-import 'package:bias_admin/app/modules/user/views/user_update_password_view.dart';
 import 'package:bias_admin/app/modules/user/views/user_update_view.dart';
 import 'package:bias_admin/app/routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -45,8 +45,8 @@ final adminMerchantPages = [
     preventDuplicates: true,
   ),
   GetPage(
-    name: Routes.userUpdatePassword,
-    page: () => UserUpdatePasswordView(),
+    name: Routes.merchantUpdatePassword,
+    page: () => MerchantUpdatePasswordView(),
     participatesInRootNavigator: true,
     preventDuplicates: true,
   ),

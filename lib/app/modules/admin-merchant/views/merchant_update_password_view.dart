@@ -1,21 +1,21 @@
-import 'package:bias_admin/app/modules/user/controllers/user_controller.dart';
+import 'package:bias_admin/app/modules/admin-merchant/controllers/merchant_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nx_flutter_ui_starter_pack/nx_flutter_ui_starter_pack.dart';
 
-class UserUpdatePasswordView extends StatefulWidget {
+class MerchantUpdatePasswordView extends StatefulWidget {
   
-  const UserUpdatePasswordView({ 
+  const MerchantUpdatePasswordView({ 
     Key? key,
   }) : super(key: key);
 
   @override
-  State<UserUpdatePasswordView> createState() => _UserUpdatePasswordViewState();
+  State<MerchantUpdatePasswordView> createState() => _MerchantUpdatePasswordViewState();
 }
 
-class _UserUpdatePasswordViewState extends State<UserUpdatePasswordView> {
+class _MerchantUpdatePasswordViewState extends State<MerchantUpdatePasswordView> {
 
-  final controller = UserController.to;
+  final controller = MerchantController.to;
 
   @override
   Widget build(BuildContext context) {

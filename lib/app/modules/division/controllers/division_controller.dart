@@ -127,6 +127,11 @@ class DivisionController extends GetxController {
 
   var division = Rx<Division?>(null);
 
+  void openFormDivision() {
+    division.value = null;
+    Get.toNamed(Routes.divisionForm);
+  }
+  
   void openEditDivision(Division division) {
     this.division.value = division;
     Get.toNamed(Routes.divisionForm);

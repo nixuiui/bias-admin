@@ -1,8 +1,6 @@
 import 'package:bias_admin/app/modules/division/controllers/division_controller.dart';
-import 'package:bias_admin/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/route_manager.dart';
 import 'package:nx_flutter_ui_starter_pack/nx_flutter_ui_starter_pack.dart';
 
 class DivisionView extends GetView<DivisionController> {
@@ -88,7 +86,7 @@ class DivisionView extends GetView<DivisionController> {
                   'Tambah Divisi',
                   color: Colors.white,
                 ),
-                onPressed: () => Get.toNamed(Routes.divisionForm),
+                onPressed: () => controller.openFormDivision(),
               ),
             ),
           ],
