@@ -53,13 +53,13 @@ class MerchantRepository {
     }
   }
   
-  Future<User?> updateBalance({
+  Future<User?> withdraw({
     required String userId,
     required int balance,
     String? note,
   }) async {
     try {
-      var url = '/${AuthService.to.role}/user-balance/$userId';
+      var url = '/${AuthService.to.role}/merchant-withdraw/$userId';
       final response = await network.patch(
         url: url,
         data: {

@@ -1,23 +1,23 @@
-import 'package:bias_admin/app/modules/user/controllers/user_controller.dart';
+import 'package:bias_admin/app/modules/admin-merchant/controllers/merchant_controller.dart';
 import 'package:bias_admin/helpers/general.dart';
 import 'package:bias_admin/resources/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nx_flutter_ui_starter_pack/nx_flutter_ui_starter_pack.dart';
 
-class UserTopupBalanceView extends StatefulWidget {
+class MerchantWithdrawView extends StatefulWidget {
   
-  const UserTopupBalanceView({ 
+  const MerchantWithdrawView({ 
     Key? key,
   }) : super(key: key);
 
   @override
-  State<UserTopupBalanceView> createState() => _UserTopupBalanceViewState();
+  State<MerchantWithdrawView> createState() => _MerchantWithdrawViewState();
 }
 
-class _UserTopupBalanceViewState extends State<UserTopupBalanceView> {
+class _MerchantWithdrawViewState extends State<MerchantWithdrawView> {
 
-  final controller = UserController.to;
+  final controller = MerchantController.to;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class _UserTopupBalanceViewState extends State<UserTopupBalanceView> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
-            'Topup Saldo',
+            'Tarik Saldo',
           )
         ),
         body: Column(
@@ -45,7 +45,7 @@ class _UserTopupBalanceViewState extends State<UserTopupBalanceView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        NxText.lead1('Topup Saldo'),
+                        NxText.lead1('Tarik Saldo'),
                         SizedBox(height: 16),
                         NxText.body2('Nominal'),
                         SizedBox(height: 8),
@@ -76,11 +76,11 @@ class _UserTopupBalanceViewState extends State<UserTopupBalanceView> {
               child: Obx(() => NxButton.primary(
                 onPressed: controller.isUpdateBalanceValid ? () {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  controller.updateBalanace();
+                  controller.withdraw();
                 } : null,
                 isLoading: controller.updatingBalance.value,
                 child: NxText(
-                  'TOP UP',
+                  'TARIK SALDO',
                   color: Colors.white,
                 ),
               )),
@@ -108,7 +108,7 @@ class _UserTopupBalanceViewState extends State<UserTopupBalanceView> {
           SizedBox(height: 6),
           SizedBox(height: 6),
           Obx(() => NxText(
-            rupiah(controller.user.value?.balance ?? 0),
+            rupiah(controller.merchant.value?.balance ?? 0),
             fontSize: 20,
             fontWeight: FontWeight.w900,
             color: Colors.white,

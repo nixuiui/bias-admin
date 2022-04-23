@@ -3,7 +3,7 @@ import 'package:bias_admin/app/modules/admin-merchant/views/merchant_detail_view
 import 'package:bias_admin/app/modules/admin-merchant/views/merchant_history_withdraw_view.dart';
 import 'package:bias_admin/app/modules/admin-merchant/views/merchant_menu_view.dart';
 import 'package:bias_admin/app/modules/admin-merchant/views/merchant_update_password_view.dart';
-import 'package:bias_admin/app/modules/user/views/user_topup_balance_view.dart';
+import 'package:bias_admin/app/modules/admin-merchant/views/merchant_withdraw_view.dart';
 import 'package:bias_admin/app/modules/user/views/user_update_view.dart';
 import 'package:bias_admin/app/routes/app_pages.dart';
 import 'package:get/get.dart';
@@ -39,8 +39,8 @@ final adminMerchantPages = [
     preventDuplicates: true,
   ),
   GetPage(
-    name: Routes.userUpdateSaldo,
-    page: () => UserTopupBalanceView(),
+    name: Routes.merchantWithdraw,
+    page: () => MerchantWithdrawView(),
     participatesInRootNavigator: true,
     preventDuplicates: true,
   ),

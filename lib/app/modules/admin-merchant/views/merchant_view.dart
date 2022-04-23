@@ -18,7 +18,7 @@ class MerchantView extends GetView<MerchantController> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
-            'List User',
+            'List Merchant',
           )
         ),
         body: Column(

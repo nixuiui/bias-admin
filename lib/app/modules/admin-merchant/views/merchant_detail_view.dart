@@ -47,8 +47,8 @@ class _MerchantDetailViewState extends State<MerchantDetailView> {
           SizedBox(height: 24),
           _buildButtonAction(
             icon: Icon(Icons.monetization_on, color: Colors.grey[700]),
-            title: 'Top Up Saldo',
-            onTap: () => Get.toNamed(Routes.userUpdateSaldo)
+            title: 'Tarik Saldo',
+            onTap: () => Get.toNamed(Routes.merchantWithdraw)
           ),
         ],
       ),

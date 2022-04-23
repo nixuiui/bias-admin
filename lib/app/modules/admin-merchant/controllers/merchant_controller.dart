@@ -125,10 +125,10 @@ class MerchantController extends GetxController {
     return valid;
   }
 
-  void updateBalanace() async {
+  void withdraw() async {
     try {
       updatingBalance.value = true;
-      final response = await _merchantRepository.updateBalance(
+      final response = await _merchantRepository.withdraw(
         balance: balance.value!, 
         note: balanceNote.value, 
         userId: merchant.value!.id!

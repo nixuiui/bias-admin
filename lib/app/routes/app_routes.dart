@@ -31,8 +31,8 @@ abstract class Routes {
   static const merchant = '/merchant';
   static const merchantDetail = '/merchant-detail';
   static const merchantWithdrawHistory = '/merchant-withdraw-history';
+  static const merchantWithdraw = '/merchant-withdraw';
   static const merchantUpdate = '/merchant-update';
-  static const merchantUpdateSaldo = '/merchant-update-saldo';
   static const merchantUpdatePassword = '/merchant-update-password';
 
 }
