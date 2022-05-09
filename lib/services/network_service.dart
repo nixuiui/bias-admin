@@ -21,7 +21,7 @@ class NetworkService {
   }
 
   final BaseOptions _baseOptions = BaseOptions(
-    baseUrl: 'https://bias-dev.herokuapp.com/api/v1',
+    baseUrl: 'https://biasschool.com/api/v1',
     connectTimeout: requestTimeOut,
     receiveTimeout: requestTimeOut,
     responseType: ResponseType.json,
