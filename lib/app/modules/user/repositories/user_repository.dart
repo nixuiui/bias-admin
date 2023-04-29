@@ -123,4 +123,22 @@ class UserRepository {
     }
   }
 
+  Future<bool> deactiveUser({
+    required String userId,
+    required bool isActive,
+  }) async {
+    try {
+      var url = '/${AuthService.to.role}/user-deactive/$userId';
+      await network.patch(
+        url: url,
+        data:  {
+          "isActive" : isActive
+        }
+      );
+      return true;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
 }

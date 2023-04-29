@@ -50,6 +50,14 @@ class _UserDetailViewState extends State<UserDetailView> {
             title: 'Top Up Saldo',
             onTap: () => Get.toNamed(Routes.userUpdateSaldo)
           ),
+          SizedBox(height: 24),
+          _buildButtonAction(
+            icon: (controller.user.value?.isActive ?? false) 
+                    ? Icon(Icons.toggle_off_rounded, color: Colors.red)
+                    : Icon(Icons.toggle_on_rounded, color: Colors.green),
+            title: (controller.user.value?.isActive ?? false) ? 'Non Aktifkan Akun' : 'Aktifkan Akun',
+            onTap: () => controller.activeUser()
+          ),
         ],
       ),
     );

@@ -25,6 +25,7 @@ class UserController extends GetxController {
   var isLoading = RxBool(false);
   final scrollController = ScrollController();
   var searchController = TextEditingController();
+  var deactiveLoading = RxBool(false);
 
   final dataList = Rx<List<User>>([]);
 
@@ -118,9 +119,6 @@ class UserController extends GetxController {
 
   bool get isUpdateBalanceValid {
     var valid = true;
-
-    if((balance.value ?? 0) <= 0) valid = false;
-
     return valid;
   }
 
@@ -266,6 +264,26 @@ class UserController extends GetxController {
       Get.back();
     } catch (e) {
       updatingUser.value = false;
+      DialogHelper.showDialogError(
+        title: 'Terjadi Kesalahan',
+        description: NetworkException.getErrorException(e).prefix
+      );
+    }
+  }
+
+  Future<void> activeUser() async {
+    try {
+      deactiveLoading.value = true;
+      await _userRepository.deactiveUser(userId: user.value!.id!, isActive: !(user.value?.isActive ?? false));
+      deactiveLoading.value = false;
+      await DialogHelper.showDialogSuccess(
+        title: 'Berhasil',
+        description: 'Akun telah di non-aktifkan',
+      );
+      onRefresh();
+      Get.back();
+    } catch (e) {
+      deactiveLoading.value = false;
       DialogHelper.showDialogError(
         title: 'Terjadi Kesalahan',
         description: NetworkException.getErrorException(e).prefix

@@ -16,6 +16,7 @@ class User {
         this.images,
         this.sold,
         this.isDeleted,
+        this.isActive,
         this.balance,
         this.id,
         this.userName,
@@ -34,6 +35,7 @@ class User {
     List<dynamic>? images;
     int? sold;
     bool? isDeleted;
+    bool? isActive;
     int? balance;
     String? id;
     String? userName;
@@ -54,6 +56,7 @@ class User {
             : [],
         sold: json["sold"],
         isDeleted: json["isDeleted"],
+        isActive: json["isActive"],
         balance: json["balance"],
         id: json["_id"],
         userName: json["userName"],
@@ -73,6 +76,7 @@ class User {
         "images": images != null ? List<dynamic>.from(images!.map((x) => x)) : [],
         "sold": sold,
         "isDeleted": isDeleted,
+        "isActive": isActive,
         "balance": balance,
         "_id": id,
         "userName": userName,
